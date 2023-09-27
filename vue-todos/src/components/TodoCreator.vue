@@ -2,7 +2,7 @@
 import { defineEmits, reactive } from 'vue';
 import TodoButton from "./TodoButton.vue";
 
-const emits = defineEmits("create-todo")
+const emit = defineEmits(["create-todo"])
 
 const todoState = reactive({
   todo: "",
@@ -13,7 +13,7 @@ const todoState = reactive({
 const createTodo = () => {
   todoState.invalid = false
   if (todoState.todo !== "") {
-    emits("create-todo", todoState.todo)
+    emit("create-todo", todoState.todo)
     todoState.todo = "";
     return;
   }

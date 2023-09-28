@@ -38,7 +38,7 @@ defineEmits(['toggle-complete', 'edit-todo', 'update-todo', 'delete-todo']);
          @click="$emit('edit-todo', index)" 
          />
       <Icon icon="ph:trash" class="icon" color="#f95e5e" width="22" 
-        @click="$emit('delete-todo', todo.id)"
+         @click="$emit('delete-todo', todo.id)"
       
       />
     </div>

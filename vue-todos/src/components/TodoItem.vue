@@ -2,31 +2,36 @@
 import { Icon } from '@iconify/vue';
 
 const props = defineProps({
-    todo: {
-        type: Object, 
-        required: true,
-        default: () => {},
-    }
-})
+  todo: {
+    type: Object,
+    required: true,
+    default: () => { },
+  },
+  index: {
+    type: Number,
+    required: true,
+  },
+});
+
+defineEmits(['toggle-complete']);
+
 </script>
 
 <template>
-    <li>
-        <input type="checkbox" checke="todo.isCompleted">
-        <div class="todo">
-            <input v-if="todo.isEditing" type="text" :value="todo.name">
-            <span v-else>
-                {{ todo.name }}
-            </span>
-        </div>
-        <div class="todo-actions">
-
-            <Icon v-if="todo.isEditing" icon="ph:check-circle" class="icon" color="#41b080" width="22" />
-            <Icon v-else icon="ph:pencil-fill" class="icon" color="#41b080" width="22" />
-            <Icon icon="ph:trash" class="icon" color="#f95e5e" width="22" />
-        </div>
-    </li>
-
+  <li>
+    <input type="checkbox" :value="todo.isCompleted" @input="$emit('toggle-complete', index)" />
+    <div class="todo">
+      <input v-if="todo.isEditing" type="text" :value="todo.name">
+      <span v-else :class="{'completed-todo' : todo.isCompleted}">
+        {{ todo.name }}
+      </span>
+    </div>
+    <div class="todo-actions">
+      <Icon v-if="todo.isEditing" icon="ph:check-circle" class="icon" color="#41b080" width="22" />
+      <Icon v-else icon="ph:pencil-fill" class="icon" color="#41b080" width="22" />
+      <Icon icon="ph:trash" class="icon" color="#f95e5e" width="22" />
+    </div>
+  </li>
 </template>
 
 <style lang="scss" scoped>
@@ -61,6 +66,10 @@ li {
   .todo {
     flex: 1;
 
+    .completed-todo {
+      text-decoration: line-through;
+    }
+
     input[type="text"] {
       width: 100%;
       padding: 2px 6px;
@@ -73,6 +82,7 @@ li {
     gap: 6px;
     opacity: 0;
     transition: 150ms ease-in-out;
+
     .icon {
       cursor: pointer;
     }

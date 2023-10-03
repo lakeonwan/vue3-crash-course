@@ -24,7 +24,7 @@ export default defineConfig(({ command }) => {
   }
 
   if (command !== 'serve') {
-    config.base = '/vue3-vite-gh-pages/'
+    config.base = '/vue3-crash-course/'
   }
 
   return config

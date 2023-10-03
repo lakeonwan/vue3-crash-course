@@ -20,11 +20,11 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig(({ command }) => {
   const config = {
     plugins: [vue()],
-    base: '/dist/',
+    base: '/',
   }
 
   if (command !== 'serve') {
-    config.base = '/vue3-crash-course/dist/'
+    config.base = '/vue3-vite-gh-pages/'
   }
 
   return config
